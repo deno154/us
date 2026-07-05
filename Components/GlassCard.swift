@@ -11,12 +11,14 @@ struct GlassCard<Content: View>: View {
     var body: some View {
 
         content
-            .padding(16)
+            .padding(.vertical, 18)
+            .padding(.horizontal, 20)
             .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 24)
+                RoundedRectangle(cornerRadius: 26, style: .continuous)
                     .stroke(.white.opacity(0.08), lineWidth: 1)
             )
+            .shadow(color: .black.opacity(0.25), radius: 18, x: 0, y: 10)
     }
 }
