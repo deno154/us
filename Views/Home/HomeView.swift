@@ -24,7 +24,7 @@ struct HomeView: View {
 
             ZStack {
 
-                // BACKGROUND IMAGE (blur + scale)
+                // BACKGROUND
                 if let photo = currentPhoto,
                    let uiImage = UIImage(data: photo.data) {
 
@@ -32,24 +32,18 @@ struct HomeView: View {
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
-                        .blur(radius: 40)
-                        .scaleEffect(1.2)
+                        .blur(radius: 50)
                         .opacity(0.6)
-                        .animation(.easeInOut(duration: 0.6), value: index)
-
+                        .animation(.easeInOut(duration: 0.5), value: index)
                 } else {
                     Color.black.ignoresSafeArea()
                 }
 
-                // DARK OVERLAY
-                Color.black.opacity(0.35)
-                    .ignoresSafeArea()
-
-                VStack(spacing: 20) {
+                VStack(spacing: 24) {
 
                     Spacer()
 
-                    // MAIN PHOTO CARD
+                    // MAIN PHOTO
                     if let photo = currentPhoto,
                        let uiImage = UIImage(data: photo.data) {
 
@@ -59,49 +53,35 @@ struct HomeView: View {
                             .frame(width: 280, height: 280)
                             .clipShape(RoundedRectangle(cornerRadius: 28))
                             .shadow(color: .black.opacity(0.4), radius: 20)
-                            .transition(.opacity.combined(with: .scale))
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    index = (index + 1) % photos.count
+                                }
+                            }
                     }
 
-                    // GLASS CARD
-                    VStack(spacing: 10) {
+                    // GLASS INFO CARD
+                    GlassCard {
 
-                        Text("26 September 2025")
-                            .font(.headline)
-                            .foregroundStyle(.white.opacity(0.8))
+                        VStack(spacing: 10) {
 
-                        Text("\(days)")
-                            .font(.system(size: 64, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
+                            Text("26 September 2025")
+                                .font(.headline)
+                                .foregroundStyle(.white.opacity(0.8))
 
+                            Text("\(days)")
+                                .font(.system(size: 64, weight: .bold, design: .rounded))
+                                .foregroundStyle(.white)
+
+                        }
                     }
-                    .padding(.vertical, 20)
-                    .frame(maxWidth: .infinity)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
                     .padding(.horizontal, 24)
 
                     Spacer()
-
                 }
-                .padding(.top, 40)
             }
             .navigationTitle("Us")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                startAutoRotation()
-            }
-        }
-    }
-
-    private func startAutoRotation() {
-
-        guard photos.count > 1 else { return }
-
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-
-            withAnimation(.easeInOut(duration: 0.6)) {
-                index = (index + 1) % photos.count
-            }
         }
     }
 }

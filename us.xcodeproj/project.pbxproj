@@ -18,6 +18,7 @@
 		B0E69BB22FFAA57500730965 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BB12FFAA56A00730965 /* PhotoCard.swift */; };
 		B0E69BB42FFAA61E00730965 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BB32FFAA61C00730965 /* NoteModel.swift */; };
 		B0E69BB72FFAA6C000730965 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BB62FFAA69B00730965 /* ThemeManager.swift */; };
+		B0E69BBB2FFAA74600730965 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BBA2FFAA74500730965 /* GlassCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		B0E69BB12FFAA56A00730965 /* PhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCard.swift; sourceTree = "<group>"; };
 		B0E69BB32FFAA61C00730965 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		B0E69BB62FFAA69B00730965 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		B0E69BBA2FFAA74500730965 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -120,6 +122,7 @@
 		B0E69B982FFA9BD700730965 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B0E69BBA2FFAA74500730965 /* GlassCard.swift */,
 				B0E69BB12FFAA56A00730965 /* PhotoCard.swift */,
 			);
 			path = Components;
@@ -273,6 +276,7 @@
 				B0E69BAE2FFAA24800730965 /* PhotoModel.swift in Sources */,
 				B0E69BAC2FFAA04A00730965 /* NotesView.swift in Sources */,
 				B0E69BAB2FFAA04700730965 /* HomeView.swift in Sources */,
+				B0E69BBB2FFAA74600730965 /* GlassCard.swift in Sources */,
 				B0E69BB42FFAA61E00730965 /* NoteModel.swift in Sources */,
 				B0E69BAA2FFAA04300730965 /* PhotosView.swift in Sources */,
 				B0E69BA92FFAA04000730965 /* SettingsView.swift in Sources */,

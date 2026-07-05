@@ -21,7 +21,7 @@ struct SettingsView: View {
                 }
 
                 Section("About") {
-                    Text("Us — Arina relationship tracker")
+                    Text("Us — tracker")
                 }
             }
             .navigationTitle("Settings")
