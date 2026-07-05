@@ -28,29 +28,14 @@ struct PhotosView: View {
 
                     LazyVStack(spacing: 16) {
 
-                        ForEach(photos) { photo in
+                        ForEach(photos, id: \.persistentModelID) { photo in
 
-                            if let uiImage = UIImage(data: photo.data) {
-
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(height: 260)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                    .clipped()
-                                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 6)
-                                    .padding(.horizontal)
-                                    .swipeActions(edge: .trailing) {
-                                        Button(role: .destructive) {
-                                            context.delete(photo)
-                                        } label: {
-                                            Label("Delete", systemImage: "trash")
-                                        }
-                                    }
-                            }
+                            PhotoCard(photo: photo)
+                                .transition(.opacity)
                         }
                     }
                     .padding(.top, 12)
+                    .animation(.easeInOut, value: photos.count)
                 }
             }
             .navigationTitle("Photos")
@@ -65,7 +50,9 @@ struct PhotosView: View {
             .onChange(of: pickerItem) { _, newItem in
                 Task {
                     guard let data = try? await newItem?.loadTransferable(type: Data.self) else { return }
-                    context.insert(PhotoModel(data: data))
+
+                    let photo = PhotoModel(data: data)
+                    context.insert(photo)
                 }
             }
         }
