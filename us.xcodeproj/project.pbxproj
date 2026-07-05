@@ -16,6 +16,7 @@
 		B0E69BAE2FFAA24800730965 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BAD2FFAA19E00730965 /* PhotoModel.swift */; };
 		B0E69BB02FFAA2DA00730965 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BAF2FFAA2AD00730965 /* HomeViewModel.swift */; };
 		B0E69BB22FFAA57500730965 /* PhotoCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BB12FFAA56A00730965 /* PhotoCard.swift */; };
+		B0E69BB42FFAA61E00730965 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E69BB32FFAA61C00730965 /* NoteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B0E69BAD2FFAA19E00730965 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		B0E69BAF2FFAA2AD00730965 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B0E69BB12FFAA56A00730965 /* PhotoCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCard.swift; sourceTree = "<group>"; };
+		B0E69BB32FFAA61C00730965 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -88,6 +90,7 @@
 		B0E69B932FFA9B9400730965 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B0E69BB32FFAA61C00730965 /* NoteModel.swift */,
 				B0E69BAD2FFAA19E00730965 /* PhotoModel.swift */,
 			);
 			path = Models;
@@ -266,6 +269,7 @@
 				B0E69BAE2FFAA24800730965 /* PhotoModel.swift in Sources */,
 				B0E69BAC2FFAA04A00730965 /* NotesView.swift in Sources */,
 				B0E69BAB2FFAA04700730965 /* HomeView.swift in Sources */,
+				B0E69BB42FFAA61E00730965 /* NoteModel.swift in Sources */,
 				B0E69BAA2FFAA04300730965 /* PhotosView.swift in Sources */,
 				B0E69BA92FFAA04000730965 /* SettingsView.swift in Sources */,
 				B0E69BA42FFA9D2D00730965 /* RootTabView.swift in Sources */,

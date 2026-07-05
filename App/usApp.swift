@@ -9,6 +9,9 @@ struct UsApp: App {
         WindowGroup {
             RootTabView()
         }
-        .modelContainer(for: PhotoModel.self)
+        .modelContainer(for: [
+            PhotoModel.self,
+            NoteModel.self
+        ])
     }
 }
