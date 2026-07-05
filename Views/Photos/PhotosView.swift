@@ -13,7 +13,7 @@ struct PhotosView: View {
 
         NavigationStack {
 
-            VStack {
+            ScrollView {
 
                 if photos.isEmpty {
 
@@ -22,10 +22,11 @@ struct PhotosView: View {
                         systemImage: "photo.on.rectangle",
                         description: Text("Add your first photo")
                     )
+                    .padding(.top, 80)
 
                 } else {
 
-                    List {
+                    LazyVStack(spacing: 16) {
 
                         ForEach(photos) { photo in
 
@@ -34,23 +35,26 @@ struct PhotosView: View {
                                 Image(uiImage: uiImage)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(height: 240)
+                                    .frame(height: 260)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
                                     .clipped()
-                                    .cornerRadius(16)
-                                    .listRowInsets(EdgeInsets())
+                                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 6)
+                                    .padding(.horizontal)
+                                    .swipeActions(edge: .trailing) {
+                                        Button(role: .destructive) {
+                                            context.delete(photo)
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
+                                        }
+                                    }
                             }
                         }
-                        .onDelete(perform: deletePhotos)
                     }
-                    .listStyle(.plain)
+                    .padding(.top, 12)
                 }
             }
             .navigationTitle("Photos")
             .toolbar {
-
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
-                }
 
                 ToolbarItem(placement: .topBarTrailing) {
                     PhotosPicker(selection: $pickerItem, matching: .images) {
@@ -61,19 +65,9 @@ struct PhotosView: View {
             .onChange(of: pickerItem) { _, newItem in
                 Task {
                     guard let data = try? await newItem?.loadTransferable(type: Data.self) else { return }
-                    let photo = PhotoModel(data: data)
-                    context.insert(photo)
+                    context.insert(PhotoModel(data: data))
                 }
             }
-        }
-    }
-
-    // MARK: - Delete
-
-    private func deletePhotos(at offsets: IndexSet) {
-        for index in offsets {
-            let photo = photos[index]
-            context.delete(photo)
         }
     }
 }
