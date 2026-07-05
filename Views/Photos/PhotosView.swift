@@ -16,39 +16,46 @@ struct PhotosView: View {
             VStack {
 
                 if photos.isEmpty {
+
                     ContentUnavailableView(
                         "No Photos",
-                        systemImage: "photo",
+                        systemImage: "photo.on.rectangle",
                         description: Text("Add your first photo")
                     )
+
                 } else {
 
-                    ScrollView {
-                        LazyVStack(spacing: 12) {
+                    List {
 
-                            ForEach(photos) { photo in
-                                if let uiImage = UIImage(data: photo.data) {
-                                    Image(uiImage: uiImage)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(height: 250)
-                                        .clipped()
-                                        .cornerRadius(16)
-                                }
+                        ForEach(photos) { photo in
+
+                            if let uiImage = UIImage(data: photo.data) {
+
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(height: 240)
+                                    .clipped()
+                                    .cornerRadius(16)
+                                    .listRowInsets(EdgeInsets())
                             }
                         }
-                        .padding()
+                        .onDelete(perform: deletePhotos)
                     }
+                    .listStyle(.plain)
                 }
             }
             .navigationTitle("Photos")
             .toolbar {
 
-                PhotosPicker(
-                    selection: $pickerItem,
-                    matching: .images
-                ) {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+
+                ToolbarItem(placement: .topBarTrailing) {
+                    PhotosPicker(selection: $pickerItem, matching: .images) {
+                        Image(systemName: "plus")
+                    }
                 }
             }
             .onChange(of: pickerItem) { _, newItem in
@@ -60,4 +67,17 @@ struct PhotosView: View {
             }
         }
     }
+
+    // MARK: - Delete
+
+    private func deletePhotos(at offsets: IndexSet) {
+        for index in offsets {
+            let photo = photos[index]
+            context.delete(photo)
+        }
+    }
+}
+
+#Preview {
+    PhotosView()
 }

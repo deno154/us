@@ -1,10 +1,9 @@
 import Foundation
-import SwiftData
 
 @MainActor
-final class HomeViewModel: ObservableObject {
+final class HomeViewModel {
 
-    @Published var currentIndex: Int = 0
+    var currentIndex: Int = 0
 
     func currentPhoto(_ photos: [PhotoModel]) -> PhotoModel? {
         guard !photos.isEmpty else { return nil }
