@@ -32,53 +32,65 @@ struct HomeView: View {
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
-                        .blur(radius: 50)
-                        .opacity(0.6)
-                        .animation(.easeInOut(duration: 0.5), value: index)
+                        .blur(radius: 55)
+                        .opacity(0.65)
+                        .animation(.easeInOut(duration: 0.4), value: index)
                 } else {
                     Color.black.ignoresSafeArea()
                 }
 
-                VStack(spacing: 24) {
+                VStack(spacing: 26) {
 
                     Spacer()
 
-                    // MAIN PHOTO
-                    if let photo = currentPhoto,
-                       let uiImage = UIImage(data: photo.data) {
+                    // SWIPE CAROUSEL AREA
+                    if !photos.isEmpty {
 
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 280, height: 280)
-                            .clipShape(RoundedRectangle(cornerRadius: 28))
-                            .shadow(color: .black.opacity(0.4), radius: 20)
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.5)) {
-                                    index = (index + 1) % photos.count
+                        TabView(selection: $index) {
+
+                            ForEach(Array(photos.enumerated()), id: \.offset) { i, photo in
+
+                                if let uiImage = UIImage(data: photo.data) {
+
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 280, height: 280)
+                                        .clipShape(RoundedRectangle(cornerRadius: 28))
+                                        .shadow(color: .black.opacity(0.4), radius: 20)
+                                        .tag(i)
+                                        .scaleEffect(index == i ? 1.0 : 0.92)
+                                        .animation(.easeInOut(duration: 0.3), value: index)
                                 }
                             }
-                    }
-
-                    // GLASS INFO CARD
-                    GlassCard {
-
-                        VStack(spacing: 10) {
-
-                            Text("26 September 2025")
-                                .font(.headline)
-                                .foregroundStyle(.white.opacity(0.8))
-
-                            Text("\(days)")
-                                .font(.system(size: 64, weight: .bold, design: .rounded))
-                                .foregroundStyle(.white)
-
+                        }
+                        .frame(height: 300)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .onChange(of: index) { _, _ in
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         }
                     }
+
+                    // GLASS CARD
+                    VStack(spacing: 10) {
+
+                        Text("26 September 2025")
+                            .font(.headline)
+                            .foregroundStyle(.white.opacity(0.8))
+
+                        Text("\(days)")
+                            .font(.system(size: 64, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                    }
+                    .padding(.vertical, 20)
+                    .frame(maxWidth: .infinity)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
                     .padding(.horizontal, 24)
 
                     Spacer()
                 }
+                .padding(.top, 40)
             }
             .navigationTitle("Us")
             .navigationBarTitleDisplayMode(.inline)
